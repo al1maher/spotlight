@@ -1,0 +1,4 @@
+spotlight
+*.o
+*.out
+build/
