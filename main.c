@@ -7,10 +7,12 @@
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
 #include <X11/extensions/Xrandr.h>
+#include <X11/cursorfont.h>
 
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
+
 
 static const char *VERT_SRC =
     "#version 330 core\n"
@@ -200,6 +202,10 @@ int main(void)
         vi->depth, InputOutput, vi->visual,
         CWColormap | CWEventMask | CWOverrideRedirect | CWSaveUnder, &swa);
 
+    // force normal arrow cursor 
+    Cursor cursor = XCreateFontCursor(dpy, XC_left_ptr);
+    XDefineCursor(dpy, win, cursor);
+
     XMapWindow(dpy, win);
     XStoreName(dpy, win, "spotlight");
     XSetInputFocus(dpy, win, RevertToParent, CurrentTime);
@@ -256,8 +262,7 @@ int main(void)
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void *)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    /* ── Screenshot texture ─────────────────────────────────────────── */
-    /*  XGetImage/ZPixmap gives BGRX pixels in little-endian byte order. */
+    // Screenshot texture
     GLuint tex;
     glGenTextures(1, &tex);
     glActiveTexture(GL_TEXTURE0);
@@ -447,5 +452,6 @@ int main(void)
     glXDestroyContext(dpy, glc);
     XDestroyWindow(dpy, win);
     XCloseDisplay(dpy);
+    XFreeCursor(dpy, cursor);
     return 0;
 }
