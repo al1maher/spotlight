@@ -2,7 +2,7 @@
 
 A lightweight fullscreen X11 spotlight + zoom tool.
 
-Inspired by "boomer" by Tsoding. Special thanks to him and his great content!
+Inspired by [boomer by Tsoding](https://github.com/tsoding/boomer). Special thanks to Tsoding for his great content!
 
 ---
 
@@ -47,18 +47,6 @@ sudo xbps-install -S libX11-devel libXrandr-devel MesaLib-devel glew-devel
 ```
 
 ---
-
-## Build
-
-```bash
-make
-```
-
-Run:
-
-```bash
-make run
-```
 
 ## Notes
 
