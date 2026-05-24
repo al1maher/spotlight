@@ -13,7 +13,6 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 
-
 static const char *VERT_SRC =
     "#version 330 core\n"
     "layout(location=0) in vec2 aPos;\n" // screenshot pixel coords
@@ -202,7 +201,7 @@ int main(void)
         vi->depth, InputOutput, vi->visual,
         CWColormap | CWEventMask | CWOverrideRedirect | CWSaveUnder, &swa);
 
-    // force normal arrow cursor 
+    // force normal arrow cursor
     Cursor cursor = XCreateFontCursor(dpy, XC_left_ptr);
     XDefineCursor(dpy, win, cursor);
 
@@ -342,6 +341,14 @@ int main(void)
                 mse.prev = mse.curr;
                 mse.curr.x = (float)xev.xmotion.x;
                 mse.curr.y = (float)xev.xmotion.y;
+
+                if (mse.dragging)
+                {
+                    // when drag while zooming, it moves the world (the window / screen) to adjust th spotlight postion
+                    cam.pos.x += (mse.prev.x - mse.curr.x) / cam.scale;
+                    cam.pos.y += (mse.prev.y - mse.curr.y) / cam.scale;
+                    clamp_camera(&cam, sw, sh);
+                }
                 break;
 
             case ButtonPress:
