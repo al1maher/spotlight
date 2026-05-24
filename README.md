@@ -1,6 +1,6 @@
 # Spotlight
 
-A lightweight fullscreen X11 spotlight + zoom tool.
+A lightweight fullscreen X11 spotlight + zoom tool for Linux (X11).
 
 Inspired by [boomer by Tsoding](https://github.com/tsoding/boomer). Special thanks to Tsoding for his great content!
 
