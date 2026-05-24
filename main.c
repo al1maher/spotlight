@@ -48,7 +48,7 @@ static const char *FRAG_SRC =
     "    /* darken outside the circle */\n"
     "    col.rgb    *= mix(1.0 - shadow, 1.0, lit);\n"
     "    /* solid white disc at low opacity — the halo */\n"
-    "    col.rgb     = mix(col.rgb, vec3(1.0), lit * 0.18);\n"
+    "    col.rgb = mix(col.rgb, vec3(1.0), lit * 0.04);\n"
     "    FragColor   = col;\n"
     "}\n";
 
